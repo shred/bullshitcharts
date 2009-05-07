@@ -29,20 +29,27 @@ import org.shredzone.bullshitcharts.dataset.Tendency;
  * favourized or obnoxed, which is important for the {@link Tendency} used.
  * 
  * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: ChoicePieGenerator.java 297 2009-05-07 22:12:58Z shred $
+ * @version $Id: ChoicePieGenerator.java 298 2009-05-07 22:24:14Z shred $
  */
-public class ChoicePieGenerator implements PlotGenerator {
+public class ChoicePieGenerator extends AbstractPlotGenerator {
 
     public Plot generate() {
         PieDatasetCreator dataset = new PieDatasetCreator();
-        dataset.addChoice("PHP");
-        dataset.addChoice("Java");
-        dataset.addChoice("C#");
-        dataset.addChoice("Python");
-        dataset.addChoice("Ruby");
+        
+        String choice1 = getValue("c1", "");
+        String choice2 = getValue("c2", null);
+        String choice3 = getValue("c3", null);
+        String choice4 = getValue("c4", null);
+        String choice5 = getValue("c5", null);
 
-        dataset.setFavouriteChoice("Java");
-        dataset.setTendency(Tendency.OPTIMISTIC);
+        dataset.addChoice(choice1);
+        dataset.setFavouriteChoice(choice1);
+        if (choice2 != null) dataset.addChoice(choice2);
+        if (choice3 != null) dataset.addChoice(choice3);
+        if (choice4 != null) dataset.addChoice(choice4);
+        if (choice5 != null) dataset.addChoice(choice5);
+
+        dataset.setTendency(getTendency());
 
         PiePlot3D plot = new PiePlot3D(dataset.generate());
         plot.setCircular(true);

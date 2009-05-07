@@ -33,7 +33,7 @@
 
   <servlet-mapping>
     <servlet-name>chartpic</servlet-name>
-    <url-pattern>/chart.png</url-pattern>
+    <url-pattern>/chart/*</url-pattern>
   </servlet-mapping>
 
 </web-app>

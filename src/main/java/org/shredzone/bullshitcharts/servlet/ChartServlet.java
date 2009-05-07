@@ -29,42 +29,65 @@ import javax.servlet.http.HttpServletResponse;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.servlet.ServletUtilities;
+import org.shredzone.bullshitcharts.chart.AgreementPieGenerator;
+import org.shredzone.bullshitcharts.chart.BarChartGenerator;
+import org.shredzone.bullshitcharts.chart.ChoicePieGenerator;
 import org.shredzone.bullshitcharts.chart.LineChartGenerator;
+import org.shredzone.bullshitcharts.chart.PlotGenerator;
 
 /**
  * Servlet that returns a random chart depending on the path name and request parameters.
  * 
  * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: ChartServlet.java 297 2009-05-07 22:12:58Z shred $
+ * @version $Id: ChartServlet.java 298 2009-05-07 22:24:14Z shred $
  */
 public class ChartServlet extends HttpServlet {
     private static final long serialVersionUID = 7200291835832529046L;
+    
+    private static final int IMAGE_WIDTH = 640;
+    private static final int IMAGE_HEIGHT = 480;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        
-//        Plot plot = new ChoicePieGenerator().generate();
-        Plot plot = new LineChartGenerator().generate();
-        
-        int width = 640;
-        int height = 480;
+                
+        String pathInfo = req.getPathInfo();
+        PlotGenerator generator = null;
+        if ("/pie.png".equals(pathInfo)) {
+            generator = new ChoicePieGenerator();
+        } else if ("/agree.png".equals(pathInfo)) {
+            generator = new AgreementPieGenerator();
+        } else if ("/line.png".equals(pathInfo)) {
+            generator = new LineChartGenerator();
+        } else if ("/bar.png".equals(pathInfo)) {
+            generator = new BarChartGenerator();
+        } else {
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
 
+        generator.configure(req);
+        
+        Plot plot = generator.generate();
+        
         // Generate the chart
         JFreeChart chart = new JFreeChart(plot);
-        chart.setTitle("Cool Websites Are Using...");
         chart.setAntiAlias(true);
         chart.setTextAntiAlias(true);
         chart.setBorderVisible(false);
         chart.removeLegend();
 
+        String title = req.getParameter("title");
+        if (title != null) {
+            chart.setTitle(title);
+        }
+
         String chartFilename =
-                ServletUtilities.saveChartAsPNG(chart, width, height, null);
+                ServletUtilities.saveChartAsPNG(chart, IMAGE_WIDTH, IMAGE_HEIGHT, null);
 
         // Stream the chart
-        // TODO: Cache this image
-        // resp.setHeader("Cache-Control", "cache");
-        // resp.setDateHeader("Expires", ...);
+        resp.setHeader("Cache-Control", "no-cache, must-revalidate");
+        resp.setHeader("Expires", "Sat, 01 Jan 2000 00:00:00 GMT");
         ServletUtilities.sendTempFile(chartFilename, resp);
     }
 

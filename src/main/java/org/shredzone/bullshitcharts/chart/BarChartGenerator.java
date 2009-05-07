@@ -24,20 +24,19 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
-import org.jfree.chart.renderer.category.LineAndShapeRenderer;
-import org.jfree.chart.renderer.category.LineRenderer3D;
+import org.jfree.chart.renderer.category.BarRenderer3D;
 import org.jfree.data.Range;
 import org.shredzone.bullshitcharts.dataset.LineDatasetCreator;
 import org.shredzone.bullshitcharts.dataset.Tendency;
 
 /**
- * Creates a line chart of a given choice of slices. Optionally the chart uses a given
+ * Creates a bar chart of a given choice of slices. Optionally the chart uses a given
  * {@link Tendency}.
  * 
- * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: LineChartGenerator.java 298 2009-05-07 22:24:14Z shred $
+ * @author Richard Körber {@literal dev@shredzone.de}
+ * @version $Id: BarChartGenerator.java 298 2009-05-07 22:24:14Z shred $
  */
-public class LineChartGenerator extends AbstractPlotGenerator {
+public class BarChartGenerator extends AbstractPlotGenerator {
 
     public Plot generate() {
         LineDatasetCreator dataset = new LineDatasetCreator();
@@ -57,10 +56,8 @@ public class LineChartGenerator extends AbstractPlotGenerator {
         valAxis.setTickMarksVisible(false);
         valAxis.setTickLabelsVisible(false);
         
-        LineAndShapeRenderer renderer = new LineRenderer3D();
-        renderer.setBaseShapesVisible(false);
-//        renderer.setStroke(new BasicStroke(2.5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
-
+        BarRenderer3D renderer = new BarRenderer3D();
+        
         CategoryPlot plot = new CategoryPlot(dataset.generate(), catAxis, valAxis, renderer);
         plot.setDomainGridlinesVisible(false);
         plot.setRangeGridlinesVisible(false);

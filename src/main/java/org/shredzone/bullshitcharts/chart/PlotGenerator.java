@@ -19,16 +19,27 @@
  */
 package org.shredzone.bullshitcharts.chart;
 
+import javax.servlet.ServletRequest;
 import org.jfree.chart.plot.Plot;
 
 /**
  * Generates {@link Plot} about a given topic.
  * 
  * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: PlotGenerator.java 297 2009-05-07 22:12:58Z shred $
+ * @version $Id: PlotGenerator.java 298 2009-05-07 22:24:14Z shred $
  */
 public interface PlotGenerator {
 
+    /**
+     * Configures the {@link PlotGenerator} using the given {@link ServletRequest}.
+     * The plot generator must accept missing or poor parameters, and make up some
+     * reasonable values for those parameters.
+     *
+     * @param req
+     *       {@link ServletRequest} containing the parameters.
+     */
+    void configure(ServletRequest req);
+    
     /**
      * Generate a {@link Plot}.
      * 

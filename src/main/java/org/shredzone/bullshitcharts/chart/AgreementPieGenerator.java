@@ -28,19 +28,19 @@ import org.shredzone.bullshitcharts.dataset.PieDatasetCreator;
  * "agree", "indecisive" and "disagree" slices.
  * 
  * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: AgreementPieGenerator.java 297 2009-05-07 22:12:58Z shred $
+ * @version $Id: AgreementPieGenerator.java 298 2009-05-07 22:24:14Z shred $
  */
-public class AgreementPieGenerator implements PlotGenerator {
+public class AgreementPieGenerator extends AbstractPlotGenerator {
 
     public Plot generate() {
         PieDatasetCreator dataset = new PieDatasetCreator();
-        dataset.addChoice("disagree");
+        dataset.addChoice("disagree");      // TODO: i18n
         dataset.addChoice("indecisive");
         dataset.addChoice("agree");
 
-        // dataset.setFavouriteChoice("agree");
-        // dataset.setObnoxiousChoice("disagree");
-        // dataset.setTendency(Tendency.DISASTROUS);
+        dataset.setFavouriteChoice("agree");
+        dataset.setObnoxiousChoice("disagree");
+        dataset.setTendency(getTendency());
 
         PiePlot3D plot = new PiePlot3D(dataset.generate());
         plot.setCircular(true);

@@ -30,7 +30,7 @@ import org.jfree.data.general.PieDataset;
  * Creates a random {@link PieDataset}.
  * 
  * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: PieDatasetCreator.java 297 2009-05-07 22:12:58Z shred $
+ * @version $Id: PieDatasetCreator.java 298 2009-05-07 22:24:14Z shred $
  */
 public class PieDatasetCreator {
     
@@ -170,13 +170,15 @@ public class PieDatasetCreator {
         double remain = 100d;
         int numbers = values.length;
 
-        if (favourite >= 0) {
-            remain -= values[favourite];
-            numbers--;
-        }
-        if (obnoxious >= 0) {
-            remain -= values[obnoxious];
-            numbers--;
+        if (tendency != Tendency.DONTCARE) {
+            if (favourite >= 0) {
+                remain -= values[favourite];
+                numbers--;
+            }
+            if (obnoxious >= 0) {
+                remain -= values[obnoxious];
+                numbers--;
+            }
         }
 
         Random random = new Random();
@@ -184,7 +186,7 @@ public class PieDatasetCreator {
         double max = remain / 10d;
         
         for (int ix = 0; ix < values.length; ix++) {
-            if (ix == favourite || ix == obnoxious) {
+            if (tendency != Tendency.DONTCARE && (ix == favourite || ix == obnoxious)) {
                 continue;
             }
             

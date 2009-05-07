@@ -24,9 +24,10 @@ package org.shredzone.bullshitcharts.dataset;
  * the result you actually need.
  * 
  * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: Tendency.java 297 2009-05-07 22:12:58Z shred $
+ * @version $Id: Tendency.java 298 2009-05-07 22:24:14Z shred $
  */
 public enum Tendency {
+    
     /**
      * The chart is truly random.
      */
