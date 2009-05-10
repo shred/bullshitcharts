@@ -19,6 +19,7 @@
  */
 package org.shredzone.bullshitcharts.servlet;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -26,9 +27,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.Plot;
-import org.jfree.chart.servlet.ServletUtilities;
 import org.shredzone.bullshitcharts.chart.AgreementPieGenerator;
 import org.shredzone.bullshitcharts.chart.BarChartGenerator;
 import org.shredzone.bullshitcharts.chart.ChoicePieGenerator;
@@ -39,7 +40,7 @@ import org.shredzone.bullshitcharts.chart.PlotGenerator;
  * Servlet that returns a random chart depending on the path name and request parameters.
  * 
  * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: ChartServlet.java 298 2009-05-07 22:24:14Z shred $
+ * @version $Id: ChartServlet.java 299 2009-05-10 22:19:25Z shred $
  */
 public class ChartServlet extends HttpServlet {
     private static final long serialVersionUID = 7200291835832529046L;
@@ -82,13 +83,19 @@ public class ChartServlet extends HttpServlet {
             chart.setTitle(title);
         }
 
-        String chartFilename =
-                ServletUtilities.saveChartAsPNG(chart, IMAGE_WIDTH, IMAGE_HEIGHT, null);
-
+        // Write the chart to a byte array. It is small enough so it won't load the
+        // server's memory too much.
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ChartUtilities.writeChartAsPNG(baos, chart, IMAGE_WIDTH, IMAGE_HEIGHT);
+        baos.close();
+        byte[] data = baos.toByteArray();
+        
         // Stream the chart
+        resp.setContentType("image/png");
+        resp.setContentLength(data.length);
         resp.setHeader("Cache-Control", "no-cache, must-revalidate");
         resp.setHeader("Expires", "Sat, 01 Jan 2000 00:00:00 GMT");
-        ServletUtilities.sendTempFile(chartFilename, resp);
+        resp.getOutputStream().write(data);
     }
 
     @Override
