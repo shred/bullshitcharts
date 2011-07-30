@@ -30,7 +30,7 @@ import org.jfree.data.general.PieDataset;
  * Creates a random {@link PieDataset}.
  * 
  * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: PieDatasetCreator.java 298 2009-05-07 22:24:14Z shred $
+ * @version $Id: PieDatasetCreator.java 579 2011-07-30 16:18:39Z shred $
  */
 public class PieDatasetCreator {
     
@@ -74,7 +74,7 @@ public class PieDatasetCreator {
 
     /**
      * Sets the {@link Tendency} to be used for this pie. Default is
-     * {@value Tendency#DONTCARE}.
+     * {@link Tendency#DONTCARE}.
      * 
      * @param tendency
      *            {@link Tendency} to be used

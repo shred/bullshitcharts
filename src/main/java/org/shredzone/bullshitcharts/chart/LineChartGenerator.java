@@ -35,10 +35,11 @@ import org.shredzone.bullshitcharts.dataset.Tendency;
  * {@link Tendency}.
  * 
  * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: LineChartGenerator.java 298 2009-05-07 22:24:14Z shred $
+ * @version $Id: LineChartGenerator.java 579 2011-07-30 16:18:39Z shred $
  */
 public class LineChartGenerator extends AbstractPlotGenerator {
 
+    @Override
     public Plot generate() {
         LineDatasetCreator dataset = new LineDatasetCreator();
         dataset.setTendency(getTendency());

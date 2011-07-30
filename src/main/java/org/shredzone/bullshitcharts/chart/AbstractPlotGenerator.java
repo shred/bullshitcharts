@@ -27,7 +27,7 @@ import org.shredzone.bullshitcharts.dataset.Tendency;
  * Abstract implementation of {@link PlotGenerator}.
  * 
  * @author Richard Körber {@literal dev@shredzone.de}
- * @version $Id: AbstractPlotGenerator.java 298 2009-05-07 22:24:14Z shred $
+ * @version $Id: AbstractPlotGenerator.java 579 2011-07-30 16:18:39Z shred $
  */
 public abstract class AbstractPlotGenerator implements PlotGenerator {
 
@@ -40,6 +40,7 @@ public abstract class AbstractPlotGenerator implements PlotGenerator {
      * @param req
      *            {@link ServletRequest} containing the parameters
      */
+    @Override
     public void configure(ServletRequest req) {
         this.req = req;
     }

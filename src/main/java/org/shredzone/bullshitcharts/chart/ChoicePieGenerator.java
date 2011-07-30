@@ -29,10 +29,11 @@ import org.shredzone.bullshitcharts.dataset.Tendency;
  * favourized or obnoxed, which is important for the {@link Tendency} used.
  * 
  * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: ChoicePieGenerator.java 298 2009-05-07 22:24:14Z shred $
+ * @version $Id: ChoicePieGenerator.java 579 2011-07-30 16:18:39Z shred $
  */
 public class ChoicePieGenerator extends AbstractPlotGenerator {
 
+    @Override
     public Plot generate() {
         PieDatasetCreator dataset = new PieDatasetCreator();
         
