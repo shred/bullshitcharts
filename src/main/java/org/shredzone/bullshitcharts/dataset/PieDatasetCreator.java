@@ -33,7 +33,7 @@ import org.jfree.data.general.PieDataset;
  */
 public class PieDatasetCreator {
 
-    private List<String> choices = new ArrayList<String>();
+    private List<String> choices = new ArrayList<>();
     private double[] values = null;
     private int favourite = -1;
     private int obnoxious = -1;

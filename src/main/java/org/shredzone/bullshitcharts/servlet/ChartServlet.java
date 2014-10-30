@@ -84,17 +84,17 @@ public class ChartServlet extends HttpServlet {
 
         // Write the chart to a byte array. It is small enough so it won't load the
         // server's memory too much.
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ChartUtilities.writeChartAsPNG(baos, chart, IMAGE_WIDTH, IMAGE_HEIGHT);
-        baos.close();
-        byte[] data = baos.toByteArray();
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            ChartUtilities.writeChartAsPNG(baos, chart, IMAGE_WIDTH, IMAGE_HEIGHT);
+            byte[] data = baos.toByteArray();
 
-        // Stream the chart
-        resp.setContentType("image/png");
-        resp.setContentLength(data.length);
-        resp.setHeader("Cache-Control", "no-cache, must-revalidate");
-        resp.setHeader("Expires", "Sat, 01 Jan 2000 00:00:00 GMT");
-        resp.getOutputStream().write(data);
+            // Stream the chart
+            resp.setContentType("image/png");
+            resp.setContentLength(data.length);
+            resp.setHeader("Cache-Control", "no-cache, must-revalidate");
+            resp.setHeader("Expires", "Sat, 01 Jan 2000 00:00:00 GMT");
+            resp.getOutputStream().write(data);
+        }
     }
 
     @Override
