@@ -20,13 +20,13 @@
 package org.shredzone.bullshitcharts.chart;
 
 import javax.servlet.ServletRequest;
+
 import org.jfree.chart.plot.Plot;
 
 /**
  * Generates {@link Plot} about a given topic.
- * 
- * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: PlotGenerator.java 298 2009-05-07 22:24:14Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public interface PlotGenerator {
 
@@ -39,10 +39,10 @@ public interface PlotGenerator {
      *       {@link ServletRequest} containing the parameters.
      */
     void configure(ServletRequest req);
-    
+
     /**
      * Generate a {@link Plot}.
-     * 
+     *
      * @return Generated {@link Plot}
      */
     Plot generate();

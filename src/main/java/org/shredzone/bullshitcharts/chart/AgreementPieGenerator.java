@@ -26,9 +26,8 @@ import org.shredzone.bullshitcharts.dataset.PieDatasetCreator;
 /**
  * Creates a chart showing agreement to a certain topic. The result is a pie chart with
  * "agree", "indecisive" and "disagree" slices.
- * 
- * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: AgreementPieGenerator.java 579 2011-07-30 16:18:39Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class AgreementPieGenerator extends AbstractPlotGenerator {
 

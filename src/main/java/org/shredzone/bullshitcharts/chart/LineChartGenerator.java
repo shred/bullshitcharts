@@ -33,9 +33,8 @@ import org.shredzone.bullshitcharts.dataset.Tendency;
 /**
  * Creates a line chart of a given choice of slices. Optionally the chart uses a given
  * {@link Tendency}.
- * 
- * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: LineChartGenerator.java 579 2011-07-30 16:18:39Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class LineChartGenerator extends AbstractPlotGenerator {
 
@@ -51,13 +50,13 @@ public class LineChartGenerator extends AbstractPlotGenerator {
         catAxis.setUpperMargin(0.0d);
         catAxis.setTickMarksVisible(false);
         catAxis.setTickLabelsVisible(false);
-        
+
         ValueAxis valAxis = new NumberAxis(getValue("y", "Value"));
         valAxis.setRange(new Range(0.0d, 1.05d));
         valAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         valAxis.setTickMarksVisible(false);
         valAxis.setTickLabelsVisible(false);
-        
+
         LineAndShapeRenderer renderer = new LineRenderer3D();
         renderer.setBaseShapesVisible(false);
 //        renderer.setStroke(new BasicStroke(2.5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));

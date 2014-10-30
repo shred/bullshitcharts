@@ -25,9 +25,8 @@ import org.shredzone.bullshitcharts.dataset.Tendency;
 
 /**
  * Abstract implementation of {@link PlotGenerator}.
- * 
- * @author Richard Körber {@literal dev@shredzone.de}
- * @version $Id: AbstractPlotGenerator.java 579 2011-07-30 16:18:39Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public abstract class AbstractPlotGenerator implements PlotGenerator {
 
@@ -36,7 +35,7 @@ public abstract class AbstractPlotGenerator implements PlotGenerator {
     /**
      * Configures the {@link PlotGenerator} using the {@link ServletRequest}
      * parameters.
-     * 
+     *
      * @param req
      *            {@link ServletRequest} containing the parameters
      */
@@ -47,7 +46,7 @@ public abstract class AbstractPlotGenerator implements PlotGenerator {
 
     /**
      * Gets the desired resolution, in columns.
-     * 
+     *
      * @return Resolution
      */
     protected int getResolution() {
@@ -63,7 +62,7 @@ public abstract class AbstractPlotGenerator implements PlotGenerator {
 
     /**
      * Gets the desired amplitude, as a factor between 0.0d and 0.4d.
-     * 
+     *
      * @return Amplitude
      */
     protected double getAmplitude() {
@@ -82,7 +81,7 @@ public abstract class AbstractPlotGenerator implements PlotGenerator {
     /**
      * Gets a servlet parameter as value. The string is trimmed if too long. If
      * there was no parameter given, the default value is returned.
-     * 
+     *
      * @param name
      *            Name of the parameter
      * @param def
@@ -102,7 +101,7 @@ public abstract class AbstractPlotGenerator implements PlotGenerator {
 
     /**
      * Returns the desired tendency.
-     * 
+     *
      * @return {@link Tendency}
      */
     protected Tendency getTendency() {

@@ -27,16 +27,15 @@ import org.shredzone.bullshitcharts.dataset.Tendency;
 /**
  * Creates a pie chart of a given choice of slices. Optionally, one choice can each be
  * favourized or obnoxed, which is important for the {@link Tendency} used.
- * 
- * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: ChoicePieGenerator.java 579 2011-07-30 16:18:39Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class ChoicePieGenerator extends AbstractPlotGenerator {
 
     @Override
     public Plot generate() {
         PieDatasetCreator dataset = new PieDatasetCreator();
-        
+
         String choice1 = getValue("c1", "");
         String choice2 = getValue("c2", null);
         String choice3 = getValue("c3", null);

@@ -28,12 +28,11 @@ import org.jfree.data.general.PieDataset;
 
 /**
  * Creates a random {@link PieDataset}.
- * 
- * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: PieDatasetCreator.java 579 2011-07-30 16:18:39Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class PieDatasetCreator {
-    
+
     private List<String> choices = new ArrayList<String>();
     private double[] values = null;
     private int favourite = -1;
@@ -42,7 +41,7 @@ public class PieDatasetCreator {
 
     /**
      * Adds a choice to the pie.
-     * 
+     *
      * @param choice
      *            Choice to be added
      */
@@ -53,7 +52,7 @@ public class PieDatasetCreator {
     /**
      * Makes a choice the favourite choice. If there is no choice with the given name,
      * nothing happens. Default is no favourized choice.
-     * 
+     *
      * @param choice
      *            Choice to be favourized.
      */
@@ -64,7 +63,7 @@ public class PieDatasetCreator {
     /**
      * Makes a choice the obnoxed choice. If there is no choice with the given name,
      * nothing happens. Default is no obnoxed choice.
-     * 
+     *
      * @param choice
      *            Choice to be obnoxed.
      */
@@ -75,59 +74,63 @@ public class PieDatasetCreator {
     /**
      * Sets the {@link Tendency} to be used for this pie. Default is
      * {@link Tendency#DONTCARE}.
-     * 
+     *
      * @param tendency
      *            {@link Tendency} to be used
      */
     public void setTendency(Tendency tendency) {
         this.tendency = tendency;
     }
-    
+
     /**
      * Generates a {@link PieDataset} out of the given parameters.
-     * 
+     *
      * @return {@link PieDataset}
      */
     public PieDataset generate() {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        
-        values = new double[choices.size()];
-        
-        switch (tendency) {
-        case EUPHORIC:
-            setObnoxious(0d, 100d - setFavourite(80d, 100d));
-            break;
 
-        case OPTIMISTIC:
-            setObnoxious(10d, 95d - setFavourite(40d, 80d));
-            break;
-            
-        case NEUTRAL:
-            setFavourite(30d, 50d);
-            setObnoxious(30d, 50d);
-            break;
-            
-        case PESSIMISTIC:
-            setFavourite(10d, 95d - setObnoxious(40d, 80d));
-            break;
-            
-        case DISASTROUS:
-            setFavourite(0d, 100d - setObnoxious(80d, 100d));
-            break;
+        values = new double[choices.size()];
+
+        switch (tendency) {
+            case EUPHORIC:
+                setObnoxious(0d, 100d - setFavourite(80d, 100d));
+                break;
+
+            case OPTIMISTIC:
+                setObnoxious(10d, 95d - setFavourite(40d, 80d));
+                break;
+
+            case NEUTRAL:
+                setFavourite(30d, 50d);
+                setObnoxious(30d, 50d);
+                break;
+
+            case PESSIMISTIC:
+                setFavourite(10d, 95d - setObnoxious(40d, 80d));
+                break;
+
+            case DISASTROUS:
+                setFavourite(0d, 100d - setObnoxious(80d, 100d));
+                break;
+
+            case DONTCARE:
+                // I really don't care...
+                break;
         }
-        
+
         fillValues();
-        
+
         for (int ix = 0; ix < values.length; ix++) {
             dataset.setValue(choices.get(ix), values[ix]);
         }
-        
+
         return dataset;
     }
-    
+
     /**
      * Sets the value of the favourite choice.
-     * 
+     *
      * @param min
      *            Minimum percentage
      * @param max
@@ -145,7 +148,7 @@ public class PieDatasetCreator {
 
     /**
      * Sets the value of the obnoxed choice.
-     * 
+     *
      * @param min
      *            Minimum percentage
      * @param max
@@ -184,12 +187,12 @@ public class PieDatasetCreator {
         Random random = new Random();
         double avg = remain / numbers;
         double max = remain / 10d;
-        
+
         for (int ix = 0; ix < values.length; ix++) {
             if (tendency != Tendency.DONTCARE && (ix == favourite || ix == obnoxious)) {
                 continue;
             }
-            
+
             if (numbers > 1) {
                 double val = ((random.nextGaussian() * max) + avg);
                 if (val < 0) val = 0 ;
@@ -203,5 +206,5 @@ public class PieDatasetCreator {
             }
         }
     }
-    
+
 }

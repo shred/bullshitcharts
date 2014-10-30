@@ -22,12 +22,11 @@ package org.shredzone.bullshitcharts.dataset;
 /**
  * Tendency that the chart tries to express. Use this to forge the statistics so it shows
  * the result you actually need.
- * 
- * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: Tendency.java 298 2009-05-07 22:24:14Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public enum Tendency {
-    
+
     /**
      * The chart is truly random.
      */

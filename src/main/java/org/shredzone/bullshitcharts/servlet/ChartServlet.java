@@ -38,20 +38,19 @@ import org.shredzone.bullshitcharts.chart.PlotGenerator;
 
 /**
  * Servlet that returns a random chart depending on the path name and request parameters.
- * 
- * @author  Richard Körber {@literal dev@shredzone.de}
- * @version $Id: ChartServlet.java 299 2009-05-10 22:19:25Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class ChartServlet extends HttpServlet {
     private static final long serialVersionUID = 7200291835832529046L;
-    
+
     private static final int IMAGE_WIDTH = 640;
     private static final int IMAGE_HEIGHT = 480;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-                
+
         String pathInfo = req.getPathInfo();
         PlotGenerator generator = null;
         if ("/pie.png".equals(pathInfo)) {
@@ -68,9 +67,9 @@ public class ChartServlet extends HttpServlet {
         }
 
         generator.configure(req);
-        
+
         Plot plot = generator.generate();
-        
+
         // Generate the chart
         JFreeChart chart = new JFreeChart(plot);
         chart.setAntiAlias(true);
@@ -89,7 +88,7 @@ public class ChartServlet extends HttpServlet {
         ChartUtilities.writeChartAsPNG(baos, chart, IMAGE_WIDTH, IMAGE_HEIGHT);
         baos.close();
         byte[] data = baos.toByteArray();
-        
+
         // Stream the chart
         resp.setContentType("image/png");
         resp.setContentLength(data.length);

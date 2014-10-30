@@ -32,9 +32,8 @@ import org.shredzone.bullshitcharts.dataset.Tendency;
 /**
  * Creates a bar chart of a given choice of slices. Optionally the chart uses a given
  * {@link Tendency}.
- * 
- * @author Richard Körber {@literal dev@shredzone.de}
- * @version $Id: BarChartGenerator.java 579 2011-07-30 16:18:39Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class BarChartGenerator extends AbstractPlotGenerator {
 
@@ -50,15 +49,15 @@ public class BarChartGenerator extends AbstractPlotGenerator {
         catAxis.setUpperMargin(0.0d);
         catAxis.setTickMarksVisible(false);
         catAxis.setTickLabelsVisible(false);
-        
+
         ValueAxis valAxis = new NumberAxis(getValue("y", "Value"));
         valAxis.setRange(new Range(0.0d, 1.05d));
         valAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         valAxis.setTickMarksVisible(false);
         valAxis.setTickLabelsVisible(false);
-        
+
         BarRenderer3D renderer = new BarRenderer3D();
-        
+
         CategoryPlot plot = new CategoryPlot(dataset.generate(), catAxis, valAxis, renderer);
         plot.setDomainGridlinesVisible(false);
         plot.setRangeGridlinesVisible(false);
