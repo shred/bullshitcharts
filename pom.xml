@@ -16,13 +16,13 @@
         </license>
     </licenses>
     <scm>
-        <url>scm:git:git@github.com:shred/bullshitcharts.git</url>
+        <url>https://github.com/shred/bullshitcharts/</url>
         <connection>scm:git:git@github.com:shred/bullshitcharts.git</connection>
         <developerConnection>scm:git:git@github.com:shred/bullshitcharts.git</developerConnection>
     </scm>
     <issueManagement>
-        <system>Redmine</system>
-        <url>http://www.shredzone.org/projects/bullshitcharts/issues</url>
+        <system>GitHub Issues</system>
+        <url>https://github.com/shred/bullshitcharts/issues</url>
     </issueManagement>
     <developers>
         <developer>
