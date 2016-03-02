@@ -23,89 +23,94 @@
 -->
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="robots" content="index,nofollow" />
-<title>Bullshit Chart Generator</title>
-<script src="js/charts.js" type="text/javascript"></script>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="robots" content="index,nofollow" />
+  <title>Bullshit Chart Generator</title>
+  <script src="js/charts.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 <body onload="expose(1)">
-<noscript>Sorry, this page requires JavaScript.</noscript>
-<form action="#" name="paramform" onsubmit="return generateChart()"
-    accept-charset="utf-8">
-<table>
-    <tr>
-        <th>Chart Type:</th>
-        <td>
-            <input type="radio" name="mode" value="pie" id="modePie" onclick="expose(0)" /><label for="modePie">Pie</label>
-            <input type="radio" name="mode" value="agree" id="modeAgree" onclick="expose(1)" checked="checked" /><label for="modeAgree">Agree</label>
-            <input type="radio" name="mode" value="line" id="modeLine" onclick="expose(2)" /><label for="modeLine">Line</label>
-            <input type="radio" name="mode" value="bar" id="modeBar" onclick="expose(3)" /><label for="modeBar">Bar</label>
-        </td>
-    </tr>
+  <div class="titlebar"><img src="img/bslogo.png" width="180" height="40" alt="bullshitcharts" /></div>
+  <noscript><div class="jsinfo">Sorry, but this page requires JavaScript.</div></noscript>
+  <div class="paramform">
+    <form action="#" name="paramform" onsubmit="return generateChart()" accept-charset="utf-8">
+        <table>
+            <tr>
+                <th>Chart Type</th>
+                <td>
+                    <input type="radio" name="mode" value="pie" id="modePie" onclick="expose(0)" /><label for="modePie">Pie</label>
+                    <input type="radio" name="mode" value="agree" id="modeAgree" onclick="expose(1)" checked="checked" /><label for="modeAgree">Agree</label>
+                    <input type="radio" name="mode" value="line" id="modeLine" onclick="expose(2)" /><label for="modeLine">Line</label>
+                    <input type="radio" name="mode" value="bar" id="modeBar" onclick="expose(3)" /><label for="modeBar">Bar</label>
+                </td>
+            </tr>
+        
+            <tr>
+                <th>Title</th>
+                <td><input type="text" name="title" maxlength="50" class="textbox" /></td>
+            </tr>
+        
+            <tr>
+                <th>Tendency</th>
+                <td>
+                    <input type="radio" name="t" value="" id="tDontCare" /><label for="tDontCare">I don't care</label>
+                    <input type="radio" name="t" value="-2" id="tDisastrous" /><label for="tDisastrous">Disastrous</label>
+                    <input type="radio" name="t" value="-1" id="tPessimistic" /><label for="tPessimistic">Pessimistic</label>
+                    <input type="radio" name="t" value="0" id="tNeutral" checked="checked" /><label for="tNeutral">Neutral</label>
+                    <input type="radio" name="t" value="1" id="tOptimistic" /><label for="tOptimistic">Optimistic</label>
+                    <input type="radio" name="t" value="2" id="tEuphoric" /><label for="tEuphoric">Euphoric</label>
+                </td>
+            </tr>
+        
+            <tr id="slices">
+                <th>Pie Slices</th>
+                <td>
+                    <span style="preferredslice">Text 1:</span> <input type="text" name="c1" maxlength="10" class="textbox" /><br />
+                    Text 2: <input type="text" name="c2" maxlength="10" class="textbox" /><br />
+                    Text 3: <input type="text" name="c3" maxlength="10" class="textbox" /><br />
+                    Text 4: <input type="text" name="c4" maxlength="10" class="textbox" /><br />
+                    Text 5: <input type="text" name="c5" maxlength="10" class="textbox" />
+                </td>
+            </tr>
+        
+            <tr id="resolution">
+                <th>Resolution</th>
+                <td>
+                    <input type="radio" name="r" value="0" id="rCoarse" /><label for="rCoarse">Coarse (7 bars)</label>
+                    <input type="radio" name="r" value="1" id="rMedium" checked="checked" /><label for="rMedium">Medium (12 bars)</label>
+                    <input type="radio" name="r" value="2" id="rFine" /><label for="rFine">Fine (30 bars)</label>
+                </td>
+            </tr>
+        
+            <tr id="amplitude">
+                <th>Amplitude</th>
+                <td>
+                    <input type="radio" name="a" value="0" id="aFlat" /><label for="aFlat">Flat</label>
+                    <input type="radio" name="a" value="1" id="aLight" /><label for="aLight">Light</label>
+                    <input type="radio" name="a" value="2" id="aMedium" checked="checked" /><label for="aMedium">Medium</label>
+                    <input type="radio" name="a" value="3" id="aStrong" /><label for="aStrong">Strong</label>
+                </td>
+            </tr>
+        
+            <tr id="axis">
+                <th>Axis Labels</th>
+                <td>
+                    X: <input type="text" name="x" maxlength="20" value="Time" class="textbox" /><br />
+                    Y: <input type="text" name="y" maxlength="20" value="Value" class="textbox" />
+                </td>
+            </tr>
+        
+            <tr>
+                <th>&nbsp;</th>
+                <td><input type="submit" value="Bullshit Chart!" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
 
-    <tr>
-        <th>Title:</th>
-        <td><input type="text" name="title" maxlength="50" /></td>
-    </tr>
+<div class="genchart"><img id="chart" src="chart/agree.png?c=00" width="640" height="480" alt="Chart" /></div>
 
-    <tr>
-        <th>Tendency:</th>
-        <td>
-            <input type="radio" name="t" value="" id="tDontCare" /><label for="tDontCare">I don't care</label>
-            <input type="radio" name="t" value="-2" id="tDisastrous" /><label for="tDisastrous">Disastrous</label>
-            <input type="radio" name="t" value="-1" id="tPessimistic" /><label for="tPessimistic">Pessimistic</label>
-            <input type="radio" name="t" value="0" id="tNeutral" checked="checked" /><label for="tNeutral">Neutral</label>
-            <input type="radio" name="t" value="1" id="tOptimistic" /><label for="tOptimistic">Optimistic</label>
-            <input type="radio" name="t" value="2" id="tEuphoric" /><label for="tEuphoric">Euphoric</label>
-        </td>
-    </tr>
-
-    <tr id="slices">
-        <th>Pie Slices:</th>
-        <td>
-            <span style="preferredslice">Text 1:</span> <input type="text" name="c1" maxlength="10" /><br />
-            Text 2: <input type="text" name="c2" maxlength="10" /><br />
-            Text 3: <input type="text" name="c3" maxlength="10" /><br />
-            Text 4: <input type="text" name="c4" maxlength="10" /><br />
-            Text 5: <input type="text" name="c5" maxlength="10" />
-        </td>
-    </tr>
-
-    <tr id="resolution">
-        <th>Resolution:</th>
-        <td>
-            <input type="radio" name="r" value="0" id="rCoarse" /><label for="rCoarse">Coarse (7 bars)</label>
-            <input type="radio" name="r" value="1" id="rMedium" checked="checked" /><label for="rMedium">Medium (12 bars)</label>
-            <input type="radio" name="r" value="2" id="rFine" /><label for="rFine">Fine (30 bars)</label>
-        </td>
-    </tr>
-
-    <tr id="amplitude">
-        <th>Amplitude:</th>
-        <td>
-            <input type="radio" name="a" value="0" id="aFlat" /><label for="aFlat">Flat</label>
-            <input type="radio" name="a" value="1" id="aLight" /><label for="aLight">Light</label>
-            <input type="radio" name="a" value="2" id="aMedium" checked="checked" /><label for="aMedium">Medium</label>
-            <input type="radio" name="a" value="3" id="aStrong" /><label for="aStrong">Strong</label>
-        </td>
-    </tr>
-
-    <tr id="axis">
-        <th>Axis Labels:</th>
-        <td>
-            X: <input type="text" name="x" maxlength="20" value="Time" /><br />
-            Y: <input type="text" name="y" maxlength="20" value="Value" />
-        </td>
-    </tr>
-
-    <tr>
-        <th>&nbsp;</th>
-        <td><input type="submit" value="Bullshit Chart!" /></td>
-    </tr>
-</table>
-</form>
-
-<p><img id="chart" src="chart/agree.png?c=00" width="640" height="480" alt="Chart" /></p>
+<address>Powered by <a href="http://bullshitcharts.shredzone.org">bullshitcharts</a></address>
 
 </body>
 </html>
