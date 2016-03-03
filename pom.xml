@@ -90,6 +90,47 @@
                     <localCheckout>true</localCheckout>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.14.1</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>localhost/bullshitcharts</name>
+                            <build>
+                                <from>tomcat:8-jre7</from>
+                                <ports>
+                                    <port>8080</port>
+                                </ports>
+                                <runCmds>
+                                    <run>["rm", "-rf", "/usr/local/tomcat/webapps/ROOT"]</run>
+                                </runCmds>
+                                <assembly>
+                                    <basedir>/</basedir>
+                                    <inline>
+                                        <dependencySets>
+                                            <dependencySet>
+                                                <includes>
+                                                    <include>org.shredzone.bullshitcharts:bullshitcharts</include>
+                                                </includes>
+                                                <outputDirectory>/usr/local/tomcat/webapps</outputDirectory>
+                                                <outputFileNameMapping>ROOT.war</outputFileNameMapping>
+                                            </dependencySet>
+                                        </dependencySets>
+                                    </inline>
+                                </assembly>
+                                <cmd>["catalina.sh", "run"]</cmd>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>8080:8080</port>
+                                </ports>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <reporting>

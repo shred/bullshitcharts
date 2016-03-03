@@ -8,7 +8,11 @@ _bullshitcharts_ is a Java web site that generates random fake charts.
 
 ## Usage
 
-Just run the WAR file on a Java web container of your choice.
+Just execute `mvn clean install`, and then run the generated WAR file on a Java web container of your choice.
+
+Alternatively, you can use docker. Execute `mvn clean install docker:build` to build the docker image. Then execute `mvn docker:start` to start the image, and point your browser to http://localhost:8080/.
+
+_bullshitcharts_ is a standalone tool. It does not need a database or a volume.
 
 ## Contribute
 
