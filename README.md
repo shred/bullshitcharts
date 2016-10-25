@@ -1,4 +1,4 @@
-# Bullshit-Charts ![build status](https://jenkins.shredzone.net/project/bullshitcharts/builds/status.png?ref=master)
+# Bullshit-Charts
 
 > Never trust a statistics you didn't forge yourself.
 
